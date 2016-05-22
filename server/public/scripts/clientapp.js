@@ -5,6 +5,8 @@ $(document).ready(function() {
     /**-------- EVENT LISTENERS --------**/
     $('#task-form').on('click', 'circle', postTask);
     $('#task-form').on('submit', postTask);
+    $('#task-list').on('click', 'circle.check', putTask);
+    $('#task-list').on('click', 'circle.ex', deleteTask);
 
 
     /**-------- STYLING EVENT LISTENERS --------**/
@@ -14,12 +16,24 @@ $(document).ready(function() {
 
 
 
+
 });
 
-/**-------- UTILITY FUNCTIONS --------**/
+
+/**-------- STYLING FUNCTIONS --------**/
 
 function highlightActive() {
     $(this).prev().toggleClass('highlight-active');
+}
+
+/**-------- UTILITY FUNCTIONS --------**/
+//returns true if item has already been checked, and false if it has not.
+function toggleComplete(button) {
+    if (button.parent().parent().hasClass('done')) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function checkInput(string) {
@@ -29,47 +43,49 @@ function checkInput(string) {
     }
 }
 
-function getPetId(button) {
-    // get the pet ID
-    var petId = button.parent().data('petID');
-    console.log('getPetId', petId);
-    return petId;
+function getTaskId(button) {
+    // get task ID
+    var taskId = button.parent().parent().parent().parent().data('task_id');
+    console.log('getId', taskId);
+    return taskId;
 }
 
 /**-------- AJAX FUNCTIONS --------**/
-function putPet(event) {
+function putTask(event) {
     event.preventDefault();
-
-    var preparedData = dataPrep($(this));
-    var petId = getPetId($(this));
+    var preparedData = {
+        'setCompleteAs': toggleComplete($(this))
+    };
+    var taskId = getTaskId($(this));
 
     $.ajax({
         type: 'PUT',
-        url: '/pets/' + petId,
+        url: '/tasks/' + taskId,
         data: preparedData,
         success: function(data) {
-            getPets();
+            getTasks();
         },
     });
 }
 
-function deletePet(event) {
+function deleteTask(event) {
     event.preventDefault();
 
-    var petId = getPetId($(this));
+    if (confirm('Would you like to completely delete this task?')) {
+        var taskId = getTaskId($(this));
 
-    $.ajax({
-        type: 'DELETE',
-        url: '/pets/' + petId,
-        success: function(data) {
-            getPets();
-        },
-    });
+        $.ajax({
+            type: 'DELETE',
+            url: '/tasks/' + taskId,
+            success: function(data) {
+                getTasks();
+            },
+        });
+    }
 }
 
-
+//gets all the tasks from the database and appends them to the dom
 function getTasks() {
-
 
     var completeText = '';
     var circleCompleteText = '';
@@ -81,25 +97,27 @@ function getTasks() {
 
             $('#task-list').empty();
 
-
             tasks.forEach(function(task) {
                 if (task.complete) {
                     completeText = 'complete';
                     circleCompleteText = 'done';
                 }
-                $container = $('<div class="task-item ' + completeText + '"><div>');
+                $container = $('<div class="task-item ' + completeText + '"><div>').data({
+                    'task_id': task.id
+                });
+
                 $container.append('<div class="task-text">' + task.task + '</div>');
                 $container.append('<div class="task-svg">' +
                     '<svg class="svg-button ' + circleCompleteText + '" height=50 width=50>' +
                     '<g>' +
                     '<text class="circle-symbol" x=17 y=33>&#x2713;</text>' +
-                    '<circle cx=25 cy=25 r=24></circle>' +
+                    '<circle cx=25 cy=25 r=24 class="check"></circle>' +
                     '</g>' +
                     '</svg>' +
                     '<svg class="svg-button ' + circleCompleteText + '" height=50 width=50>' +
                     '<g>' +
-                    '  <text class="circle-symbol" x=17 y=33>&#x2715;</text>' +
-                    ' <circle cx=25 cy=25 r=24></circle>' +
+                    '   <text class="circle-symbol" x=17 y=33>&#x2715;</text>' +
+                    '   <circle cx=25 cy=25 r=24 class="ex"></circle>' +
                     '  </g>' +
                     '</svg>' +
                     '</div>');
@@ -122,7 +140,7 @@ function postTask(event) {
         task[field.name] = field.value;
     });
 
-    if (checkInput(task.task)!=false) {
+    if (checkInput(task.task) != false) {
         //sends the task information to the server via POST
         $.ajax({
             type: 'POST',
