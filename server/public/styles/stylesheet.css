@@ -22,10 +22,11 @@ header {
 {
     margin: 0 auto;
     width: 600px;
+    font-size: 150%;
 }
 .task-item {
-    width:500px;
-    height:75px;
+    width:600px;
+    height:80px;
     background-color: white;
     border: 1px solid black;
     border-top: 5px solid black;
@@ -38,13 +39,28 @@ header {
 }
 .task-text {
     display:inline-block;
-    width:350px;
+    width:465px;
+}
+
+.task-svg {
+    display:inline-block;
+    width: 135px;
+    padding-top:10px;
+
 }
 .complete {
     border: 1px solid #ccc;
     border-top: 5px solid #ccc;
     color: #ccc;
 
+}
+svg {
+    margin:5px;
+}
+circle {
+    fill: transparent;
+    stroke: #000;
+    stroke-width: 1.5;
 }
 
 svg.add-task {
@@ -63,23 +79,12 @@ svg circle:hover {
     stroke: #FFBF47;
 
 }
+
 svg.done circle:hover {
     stroke:#888;
 }
-.task-svg {
-    display:inline-block;
-    width: 125px;
-    padding: 10px;
-}
-
-circle {
-    fill: transparent;
-    stroke: #000;
-    stroke-width: 1.5;
 
 
-
-}
 
 svg text.circle-symbol {
     font-family: sans-serif;
@@ -93,6 +98,7 @@ svg.done circle {
     stroke: #ccc;
 
 }
+
 svg.done text.circle-symbol {
     fill: #ccc;
 
