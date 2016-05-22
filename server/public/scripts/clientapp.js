@@ -1,5 +1,6 @@
 $(document).ready(function() {
     console.log('ready');
+    //populates all the database tasks to the DOM
     getTasks();
 
     /**-------- EVENT LISTENERS --------**/
@@ -13,15 +14,11 @@ $(document).ready(function() {
     $('#task-form').find('circle').hover(highlightActive);
     $('#task-list').on('mouseenter mouseout', 'circle', highlightActive);
 
-
-
-
-
 });
 
 
 /**-------- STYLING FUNCTIONS --------**/
-
+//highlights the text inside the circles to match the hover
 function highlightActive() {
     $(this).prev().toggleClass('highlight-active');
 }
@@ -35,10 +32,10 @@ function toggleComplete(button) {
         return true;
     }
 }
-
+//makes sure user doesn't enter empty task or task too big
 function checkInput(string) {
     if (string.length == 0 || string.length > 160) {
-        alert("make sure to fill in task, and remember, you're limited to 160 characters");
+        alert("Make sure to fill in task, and remember, you're limited to 160 characters.");
         return false;
     }
 }
@@ -46,7 +43,6 @@ function checkInput(string) {
 function getTaskId(button) {
     // get task ID
     var taskId = button.parent().parent().parent().parent().data('task_id');
-    console.log('getId', taskId);
     return taskId;
 }
 
@@ -68,6 +64,7 @@ function putTask(event) {
     });
 }
 
+//sets up a dialog to make sure you really want to delete the task from the database
 function deleteTask(event) {
     event.preventDefault();
 
@@ -128,7 +125,6 @@ function getTasks() {
 
         },
     });
-
 }
 
 function postTask(event) {
