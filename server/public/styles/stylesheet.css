@@ -1,0 +1,110 @@
+body{
+font-family: Cuprum, sans-serif;;
+background-color: white;
+
+}
+
+
+header {
+    background-color: tomato;
+    height: 200px;
+    margin-top:-21px;
+    margin-bottom: 10px;
+
+}
+#task-form {
+    margin: 0 auto;
+    width: 600px;
+    text-align: center;
+}
+
+#task-list
+{
+    margin: 0 auto;
+    width: 600px;
+}
+.task-item {
+    width:500px;
+    height:75px;
+    background-color: white;
+    border: 1px solid black;
+    border-top: 5px solid black;
+    border-bottom-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    box-shadow: 1px 1px 1px #777;
+    padding:15px;
+    margin-bottom: 10px;
+
+}
+.task-text {
+    display:inline-block;
+    width:350px;
+}
+.complete {
+    border: 1px solid #ccc;
+    border-top: 5px solid #ccc;
+    color: #ccc;
+
+}
+
+svg.add-task {
+    padding:20px;
+
+}
+
+svg.add-task circle {
+    fill:transparent;
+
+}
+svg.edit-task {
+
+}
+svg circle:hover {
+    stroke: #FFBF47;
+
+}
+svg.done circle:hover {
+    stroke:#888;
+}
+.task-svg {
+    display:inline-block;
+    width: 125px;
+    padding: 10px;
+}
+
+circle {
+    fill: transparent;
+    stroke: #000;
+    stroke-width: 1.5;
+
+
+
+}
+
+svg text.circle-symbol {
+    font-family: sans-serif;
+    font-size: 24px;
+    color:#000;
+
+
+}
+
+svg.done circle {
+    stroke: #ccc;
+
+}
+svg.done text.circle-symbol {
+    fill: #ccc;
+
+}
+
+form input {
+font-size:20px;
+height:40px;
+width:500px
+
+}
+
+.highlight-active {
+    fill: #FFBF47;
+}

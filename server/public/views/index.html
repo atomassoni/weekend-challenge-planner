@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Task master</title>
+
+    <script src="/vendor/jquery.min.js"></script>
+  <script src="/scripts/clientapp.js"></script>
+    <link href="/styles/stylesheet.css" rel="stylesheet" />
+    <link href="/styles/normalize.css" rel="stylesheet" />
+
+
+  </head>
+
+  <body>
+<header>
+
+  <form id="task-form">
+    <h1>TO DO</h1>
+
+    <input type="text" id="task" name="task" />
+
+    <svg class="svg-button add-task" height=50 width=50>
+        <g>
+          <text class="circle-symbol" x=18 y=30>&#43;
+          </text>
+            <circle cx=25 cy=25 r=24></circle>
+
+        </g>
+    </svg>
+
+  </form>
+</header>
+
+
+    <div id="task-list">
+      <div class="task-item">
+        <div class="task-text">take out the trash.<span class="task-time"> 2:30pm TODAY </div>
+
+        <div class="task-svg">
+
+
+        <svg class="svg-button" height=50 width=50>
+            <g>
+                <text class="circle-symbol" x=17 y=33>&#x2713;  </text>
+                <circle cx=25 cy=25 r=24></circle>
+
+
+            </g>
+        </svg>
+
+        <svg class="svg-button" height=50 width=50>
+            <g>
+                <text class="circle-symbol" x=17 y=33>&#x2715;</text>
+                <circle cx=25 cy=25 r=24></circle>
+
+
+            </g>
+        </svg>
+        </div>
+      </div>
+
+      <div class="task-item complete">
+        <div class="task-text">feed baby. feed that baby now... get that baby a new spider for a pet.<span class="task-time"> 9pm TODAY </div>
+
+        <div class="task-svg">
+
+
+        <svg class="svg-button done" height=50 width=50>
+            <g>
+                <circle cx=25 cy=25 r=24></circle>
+                <text class="circle-symbol" x=17 y=33>&#x2713;
+        </text>
+            </g>
+        </svg>
+
+        <svg class="svg-button done" height=50 width=50>
+            <g>
+                <circle cx=25 cy=25 r=24></circle>
+                <text class="circle-symbol" x=17 y=33>&#x2715;
+        </text>
+            </g>
+        </svg>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
