@@ -147,5 +147,7 @@ function postTask(event) {
                 getTasks();
             },
         });
+        $('#task-form').find('input[type=text]').val('');
+        
     }
 }
